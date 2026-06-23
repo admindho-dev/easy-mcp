@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easy MCP Configurator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <svg class="app-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#grad1)" />
+          <path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="url(#grad2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="grad1" x1="2" y1="2" x2="22" y2="12" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#818cf8" />
+              <stop offset="100%" stop-color="#c084fc" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="2" y1="12" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#6366f1" />
+              <stop offset="100%" stop-color="#a855f7" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="logo-text">
+          <h1>Easy MCP</h1>
+          <span>Configurador de Bases de Datos</span>
+        </div>
+      </div>
+      <div class="env-badge" id="envBadge">
+        <span class="dot"></span>
+        <span class="text">Cargando...</span>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="app-workspace">
+      <!-- Left side: Configuration Wizard -->
+      <section class="wizard-panel">
+        
+        <!-- Step 1: Agent Selection -->
+        <div class="wizard-section card">
+          <div class="section-header">
+            <span class="step-num">1</span>
+            <h2>Selecciona el Agente de IA</h2>
+          </div>
+          <p class="section-desc">Elige qué agente utilizará esta conexión de base de datos. Esto determinará el formato y la ruta de guardado por defecto.</p>
+          
+          <div class="agent-grid">
+            <div class="agent-card active" data-agent="antigravity" id="btnAgentAntigravity">
+              <div class="agent-icon-wrapper">
+                <!-- Antigravity icon (Google colors/Gemini theme) -->
+                <svg viewBox="0 0 24 24" class="agent-icon">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3>Antigravity</h3>
+              <p>El asistente avanzado de Google</p>
+              <span class="badge">Nativo</span>
+            </div>
+
+            <div class="agent-card" data-agent="claude" id="btnAgentClaude">
+              <div class="agent-icon-wrapper">
+                <!-- Claude icon (Anthropic brand color style) -->
+                <svg viewBox="0 0 24 24" class="agent-icon">
+                  <path d="M12 3L2 21h20L12 3zm0 4l6.4 11.5H5.6L12 7z" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3>Claude</h3>
+              <p>Claude Desktop App</p>
+              <span class="badge">Oficial</span>
+            </div>
+
+            <div class="agent-card" data-agent="openai" id="btnAgentOpenAI">
+              <div class="agent-icon-wrapper">
+                <!-- OpenAI icon -->
+                <svg viewBox="0 0 24 24" class="agent-icon">
+                  <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8z" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3>OpenAI</h3>
+              <p>Custom / OpenAI CLI</p>
+              <span class="badge">Genérico</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Database Selection -->
+        <div class="wizard-section card">
+          <div class="section-header">
+            <span class="step-num">2</span>
+            <h2>Selecciona la Base de Datos</h2>
+          </div>
+          <p class="section-desc">Escoge el tipo de base de datos a la que deseas conectarte.</p>
+          
+          <div class="db-grid">
+            <div class="db-card active" data-db="postgresql" id="btnDbPostgres">
+              <div class="db-icon-wrapper">
+                <!-- Elephant/Postgres SVG -->
+                <svg viewBox="0 0 24 24" class="db-icon">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.3 14.8c-.3.3-.7.5-1.2.6v-3.7h.8c.4 0 .7.1 1 .3.3.2.4.6.4 1 0 .8-.3 1.4-1 1.8zm-2.8.9v-2.3H11v2.3h-1.5v-7.1h3.1c.9 0 1.6.2 2.1.7.5.5.8 1.1.8 1.9s-.3 1.5-.9 2c-.6.4-1.3.6-2.2.6v1.9H12.5z" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3>PostgreSQL</h3>
+              <p>MCP Oficial de PostgreSQL</p>
+            </div>
+
+            <div class="db-card" data-db="mysql" id="btnDbMysql">
+              <div class="db-icon-wrapper">
+                <!-- Dolphin/MySQL SVG -->
+                <svg viewBox="0 0 24 24" class="db-icon">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3>MySQL</h3>
+              <p>MCP Server Comunitario</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Connection Details -->
+        <div class="wizard-section card">
+          <div class="section-header">
+            <span class="step-num">3</span>
+            <h2>Credenciales y Configuración</h2>
+          </div>
+          <p class="section-desc">Introduce los datos de acceso para generar la cadena de conexión correspondiente.</p>
+          
+          <div class="form-container">
+            <div class="form-row">
+              <div class="form-group flex-2">
+                <label for="dbHost">Host / Servidor</label>
+                <input type="text" id="dbHost" value="localhost" placeholder="ej. localhost, 127.0.0.1 o host.docker.internal">
+              </div>
+              <div class="form-group flex-1">
+                <label for="dbPort">Puerto</label>
+                <input type="number" id="dbPort" value="5432" placeholder="5432">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="dbUser">Usuario</label>
+                <input type="text" id="dbUser" value="postgres" placeholder="Usuario de la base de datos">
+              </div>
+              <div class="form-group">
+                <label for="dbPassword">Contraseña</label>
+                <input type="password" id="dbPassword" placeholder="Contraseña de la base de datos">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-2">
+                <label for="dbName">Base de Datos</label>
+                <input type="text" id="dbName" value="mi_base_datos" placeholder="Nombre de la base de datos">
+              </div>
+              <div class="form-group flex-1">
+                <label for="mcpKey">ID en Configuración</label>
+                <input type="text" id="mcpKey" value="postgres-db" placeholder="Nombre de la clave del servidor">
+              </div>
+            </div>
+
+            <!-- Extra Toggles -->
+            <div class="toggles-row">
+              <label class="toggle-control">
+                <input type="checkbox" id="chkReadOnly" checked>
+                <span class="control-indicator"></span>
+                <span class="control-label">
+                  <strong>Modo de Solo Lectura (Recomendado)</strong>
+                  <span class="help-text">Previene que el agente modifique o elimine datos accidentalmente.</span>
+                </span>
+              </label>
+
+              <label class="toggle-control" id="sslToggleWrapper">
+                <input type="checkbox" id="chkSsl">
+                <span class="control-indicator"></span>
+                <span class="control-label">
+                  <strong>Requiere SSL/TLS</strong>
+                  <span class="help-text">Agrega parámetros de seguridad a la conexión.</span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Save & Impact -->
+        <div class="wizard-section card">
+          <div class="section-header">
+            <span class="step-num">4</span>
+            <h2>Ubicación del Archivo de Configuración</h2>
+          </div>
+          <p class="section-desc">Verifica la ruta donde se escribirá o modificará la configuración del MCP.</p>
+          
+          <div class="path-config-box">
+            <div class="input-with-button">
+              <input type="text" id="txtConfigPath" placeholder="Ruta al archivo JSON de configuración">
+              <button class="btn btn-secondary" id="btnSelectPath">Examinar</button>
+            </div>
+            <div class="file-status-indicator" id="fileStatus">
+              <span class="status-dot warning"></span>
+              <span class="status-text">Comprobando archivo...</span>
+            </div>
+          </div>
+
+          <div class="actions-box">
+            <button class="btn btn-primary btn-large btn-glowing" id="btnImpactConfig">
+              <span class="btn-text">Impactar en Configuración del Agente</span>
+              <span class="spinner hidden"></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right side: Live Preview & File Info -->
+      <section class="preview-panel">
+        <div class="sticky-preview">
+          <div class="preview-card">
+            <div class="preview-header">
+              <div class="preview-title">
+                <span class="indicator-dot active"></span>
+                <h3>Vista Previa del JSON Generado</h3>
+              </div>
+              <button class="btn btn-tiny" id="btnCopyJson" title="Copiar al portapapeles">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"/>
+                </svg>
+                <span>Copiar</span>
+              </button>
+            </div>
+            
+            <div class="code-container">
+              <pre><code id="jsonPreview" class="language-json">{}</code></pre>
+            </div>
+
+            <div class="explanation-box">
+              <h4>¿Cómo funciona la integración?</h4>
+              <p id="explanationText">
+                Se agregará la clave del servidor en el bloque <code>mcpServers</code>.
+                Si el archivo ya existe, <strong>se preservará la configuración de otros servidores</strong> y solo se creará o actualizará la clave seleccionada.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="renderer.js"></script>
+</body>
+</html>

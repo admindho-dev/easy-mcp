@@ -1,0 +1,47 @@
+{
+  "name": "easy-mcp",
+  "version": "1.0.0",
+  "description": "Multiplatform Desktop App to configure MCP database connections for Antigravity, Claude, and OpenAI.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --no-sandbox",
+    "dist": "electron-builder"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.dreamfactory.easymcp",
+    "productName": "EasyMCP",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Easy MCP Configurator"
+    }
+  },
+  "author": "DreamFactory",
+  "license": "MIT"
+}
